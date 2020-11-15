@@ -1,0 +1,20 @@
+{
+  "name": "server-apartment-hunt",
+  "version": "1.0.0",
+  "description": "Its our first team work in a project. Though it's not so big, we are having a lot of fun and learning how to solve problem and collaborate each other in a team",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "We are THREE",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "node": "^15.2.0",
+    "nodemon": "^2.0.6"
+  }
+}
