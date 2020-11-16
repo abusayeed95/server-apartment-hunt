@@ -44,7 +44,21 @@ client.connect(err => {
                 }
             })
             .catch(err => { console.log(err) })
-    })
+    });
+
+
+    //getting all the houses
+    app.get('/rent-house-collection', (req, res) => {
+        houseCollection.find({})
+            .toArray((err, collection) => {
+                res.send(collection);
+                if (err) {
+                    console.log(err);
+                };
+            });
+    });
+
+
 
     err ? console.log(err) : console.log('no error')
 });
