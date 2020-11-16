@@ -50,9 +50,11 @@ client.connect(err => {
 
     //getting all the houses
     app.get('/rent-house-collection', (req, res) => {
+
         houseCollection.find({})
             .toArray((err, collection) => {
                 res.send(collection);
+
                 if (err) {
                     console.error(err);
                 };
@@ -60,15 +62,18 @@ client.connect(err => {
     });
 
     //get single house
-    app.get(`/details/:id`, (req, res) => {
+    app.get(`/house-details/:id`, (req, res) => {
+
         houseCollection.find({ _id: ObjectId(`${req.params.id}`) })
             .toArray((err, collection) => {
                 res.send(collection);
-                // console.log(collection)
+
                 if (err) {
                     console.error(err);
                 };
+
             });
+
     });
 
     //add bookings
@@ -89,7 +94,6 @@ client.connect(err => {
         bookingsCollection.find({})
             .toArray((err, collection) => {
                 res.send(collection);
-                if (err) { console.error(err) }
             });
     });
 
