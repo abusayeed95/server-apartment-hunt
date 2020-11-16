@@ -19,6 +19,7 @@ app.use(fileUpload())
 
 client.connect(err => {
     const houseCollection = client.db(`${DB_NAME}`).collection("rentHouses");
+    const bookingsCollection = client.db(`${DB_NAME}`).collection("bookings");
 
     //root
     app.get('/', (req, res) => {
@@ -53,12 +54,50 @@ client.connect(err => {
             .toArray((err, collection) => {
                 res.send(collection);
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                 };
             });
     });
 
+    //add bookings
+    app.post('/add-bookings', (req, res) => {
+        const bookings = req.body;
 
+        bookingsCollection.insertOne(bookings)
+            .then(result => {
+                if (result.insertedCount) {
+                    res.sendStatus(200);
+                };
+            })
+            .catch(err => console.error(err));
+    });
+
+    //all bookings
+    app.get('/bookings', (req, res) => {
+        bookingsCollection.find({})
+            .toArray((err, collection) => {
+                res.send(collection);
+                if (err) { console.error(err) }
+            });
+    });
+
+    //single booking
+    app.get('/booking', (req, res) => {
+        const objectId = req.query.id;
+        bookingsCollection.find({ _id: objectId })
+            .toArray((err, collection) => {
+                if (err) {
+                    console.error(err)
+                };
+
+                res.send(collection);
+            });
+    });
+
+    //state update
+    // app.patch('/state-update', (req, res) => {
+
+    // })
 
     err ? console.log(err) : console.log('no error')
 });
