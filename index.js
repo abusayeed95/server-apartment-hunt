@@ -59,6 +59,18 @@ client.connect(err => {
             });
     });
 
+    //get single house
+    app.get(`/details/:id`, (req, res) => {
+        houseCollection.find({ _id: ObjectId(`${req.params.id}`) })
+            .toArray((err, collection) => {
+                res.send(collection);
+                // console.log(collection)
+                if (err) {
+                    console.error(err);
+                };
+            });
+    });
+
     //add bookings
     app.post('/add-bookings', (req, res) => {
         const bookings = req.body;
