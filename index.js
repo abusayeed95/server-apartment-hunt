@@ -28,8 +28,22 @@ client.connect(err => {
     //add Rent Houses
     app.post('/add-rent-houses', (req, res) => {
         const thumbnail = req.files;
-        const { name, data, mimeType, size } = thumbnail.thumbnail;
-        console.log(name, data, mimeType, size)
+        const { name, data, mimetype, size } = thumbnail.thumbnail;
+        const encThumbnail = data.toString('base64');
+
+        const convertedThumbnail = {
+            imgType: mimetype,
+            size: parseFloat(size),
+            img: Buffer.from(encThumbnail, 'base64')
+        };
+
+        houseCollection.insertOne({ ...req.body, convertedThumbnail })
+            .then(result => {
+                if (result.insertedCount) {
+                    res.sendStatus(200)
+                }
+            })
+            .catch(err => { console.log(err) })
     })
 
     err ? console.log(err) : console.log('no error')

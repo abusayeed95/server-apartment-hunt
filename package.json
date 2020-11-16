@@ -4,7 +4,9 @@
   "description": "Its our first team work in a project. Though it's not so big, we are having a lot of fun and learning how to solve problem and collaborate each other in a team",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start-dev": "nodemon index.js"
   },
   "author": "We are THREE",
   "license": "ISC",
