@@ -78,10 +78,12 @@ client.connect(err => {
 
     //add bookings
     app.post('/add-bookings', (req, res) => {
-        const bookings = req.body;
+        // const bookings = req.body;
+        // console.log(bookings);
 
-        bookingsCollection.insertOne(bookings)
+        bookingsCollection.insertOne({ ...req.body })
             .then(result => {
+                console.log(result);
                 if (result.insertedCount) {
                     res.sendStatus(200);
                 };
@@ -99,8 +101,8 @@ client.connect(err => {
 
     //single booking
     app.get('/booking', (req, res) => {
-        const objectId = req.query.id;
-        bookingsCollection.find({ _id: objectId })
+        const bookingId = req.params.id;
+        bookingsCollection.find({ bookingId: ObjectId(id) })
             .toArray((err, collection) => {
                 if (err) {
                     console.error(err)
