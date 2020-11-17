@@ -93,10 +93,15 @@ client.connect(err => {
 
     //all bookings
     app.get('/bookings', (req, res) => {
+
         bookingsCollection.find({})
             .toArray((err, collection) => {
                 res.send(collection);
-            });
+
+                if (err) {
+                    console.error(err);
+                }
+            })
     });
 
     //single booking
