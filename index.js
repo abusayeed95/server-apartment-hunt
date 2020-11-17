@@ -110,12 +110,12 @@ client.connect(err => {
 
         bookingsCollection.find({ email: req.query.email })
             .toArray((err, collection) => {
+
+                res.send(collection);
+
                 if (err) {
                     console.error(err)
                 };
-
-                res.send(collection);
-                console.log(collection)
             });
     });
 
