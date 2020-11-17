@@ -105,9 +105,10 @@ client.connect(err => {
     });
 
     //single booking
-    app.get('/booking', (req, res) => {
-        const bookingId = req.params.id;
-        bookingsCollection.find({ bookingId: ObjectId(id) })
+    app.get('/booking/', (req, res) => {
+        console.log(req.query.email);
+
+        bookingsCollection.find({ email: req.query.email })
             .toArray((err, collection) => {
                 if (err) {
                     console.error(err)
