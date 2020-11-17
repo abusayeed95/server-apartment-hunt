@@ -120,16 +120,19 @@ client.connect(err => {
     });
 
     //state update
-    app.patch('/state-update/:id', (req, res) => {
+    app.patch('/status-update/:id', (req, res) => {
+
         console.log(req.params.id, req.body)
+
         bookingsCollection.updateOne({ _id: ObjectId(req.params.id) }, {
-            $set: { state: req.body.state }
+            $set: { status: req.body.status }
         })
             .then(result => {
+
                 if (result.modifiedCount > 0) {
                     res.sendStatus(200);
-                    // res.send({ "state": `${req.body.state}` });
-                }
+                };
+
             })
             .catch(err => console.log(err))
     });
