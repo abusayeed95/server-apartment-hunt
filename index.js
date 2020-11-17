@@ -115,6 +115,7 @@ client.connect(err => {
                 };
 
                 res.send(collection);
+                console.log(collection)
             });
     });
 
